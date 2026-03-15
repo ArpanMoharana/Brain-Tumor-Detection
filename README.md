@@ -123,7 +123,7 @@ Navigate to backend folder:
 ```
 cd backend
 ```
-
+Then Run the following code for respective OS
 ---
 
 ## 💻 Mac / Linux
