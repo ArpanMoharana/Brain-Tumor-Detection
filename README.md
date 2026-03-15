@@ -344,20 +344,6 @@ Visualization
 
 ---
 
-# ⚠️ Important Notes
-
-The following folders are **not included in the repository** and must be created locally:
-
-```
-dataset
-venv
-node_modules
-uploads
-```
-
-
----
-
 # 📜 License
 
 This project is licensed under the **MIT License**.
