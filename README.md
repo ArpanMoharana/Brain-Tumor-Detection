@@ -2,7 +2,14 @@
 
 An **AI-powered web application** that detects brain tumors from MRI scans using **Deep Learning with MobileNetV2 Transfer Learning**.
 
-Users can upload MRI images and the system will classify them into different tumor types while showing prediction confidence and probability distribution.
+Users can upload MRI images through a web interface and the system will classify them into different tumor types while displaying prediction confidence and probability distribution.
+
+This project demonstrates a **complete AI pipeline** combining:
+
+* Computer Vision
+* Deep Learning
+* Backend API development
+* Frontend visualization
 
 ---
 
@@ -34,6 +41,10 @@ Brain-Tumor-Detection
 │   ├── package.json
 │   └── package-lock.json
 │
+├── dataset
+│   ├── train
+│   └── test
+│
 ├── README.md
 ├── LICENSE
 └── .gitignore
@@ -57,7 +68,7 @@ cd Brain-Tumor-Detection
 
 ---
 
-# 📦 Download Dataset (Required)
+# 📦 Download Dataset
 
 The dataset is **not included in this repository** because large datasets exceed GitHub storage limits.
 
@@ -65,19 +76,13 @@ Download the dataset from Kaggle:
 
 https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
 
-Download and extract the dataset.
+Extract the dataset.
 
 ---
 
 # 📁 Add Dataset to the Project
 
-After extracting the dataset, create this folder inside the project:
-
-```
-dataset
-```
-
-Place the dataset like this:
+Place the extracted dataset inside the project like this:
 
 ```
 Brain-Tumor-Detection
@@ -96,7 +101,7 @@ Brain-Tumor-Detection
 │       └── notumor
 ```
 
-The final paths should be:
+Final paths should be:
 
 ```
 Brain-Tumor-Detection/dataset/train
@@ -105,9 +110,43 @@ Brain-Tumor-Detection/dataset/test
 
 ---
 
+# 🤖 Train the Model (Required if model file is missing/Untrained- one time only)
+
+If the file below does not exist:
+
+```
+backend/models/brain_tumor_model.h5
+```
+
+You must train the model first(one time only).
+
+Navigate to the backend folder:
+
+### Mac / Linux
+
+```
+cd backend
+python3 train_model.py
+```
+
+### Windows
+
+```
+cd backend
+python train_model.py
+```
+
+After training completes, the model will be saved as:
+
+```
+backend/models/brain_tumor_model.h5
+```
+
+---
+
 # 🚀 Running the Project
 
-The project contains two parts:
+The project has two parts:
 
 • Backend (Flask + AI Model)
 • Frontend (React Interface)
@@ -123,36 +162,37 @@ Navigate to backend folder:
 ```
 cd backend
 ```
-Then Run the following code for respective OS
+Then Run the following commands for respective OS :-
+
 ---
 
-## 💻 Mac / Linux
+## Mac / Linux
 
-Create virtual environment:
+Create virtual environment
 
 ```
 python3 -m venv venv
 ```
 
-Activate environment:
+Activate environment
 
 ```
 source venv/bin/activate
 ```
 
-Install dependencies:
+Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-Run the backend:
+Run backend server
 
 ```
 python3 app.py
 ```
 
-Backend will run on:
+Backend runs on:
 
 ```
 http://127.0.0.1:5000
@@ -160,33 +200,33 @@ http://127.0.0.1:5000
 
 ---
 
-## 🪟 Windows
+## Windows
 
-Create virtual environment:
+Create virtual environment
 
 ```
 python -m venv venv
 ```
 
-Activate environment:
+Activate environment
 
 ```
 venv\Scripts\activate
 ```
 
-Install dependencies:
+Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-Run backend:
+Run backend
 
 ```
 python app.py
 ```
 
-Backend will run on:
+Backend runs on:
 
 ```
 http://127.0.0.1:5000
@@ -196,7 +236,7 @@ http://127.0.0.1:5000
 
 # 🌐 Frontend Setup
 
-Open a **new terminal** and navigate to the frontend folder:
+Open another terminal and navigate to frontend:
 
 ```
 cd frontend
@@ -208,7 +248,7 @@ Install dependencies:
 npm install
 ```
 
-Start the React app:
+Run React application:
 
 ```
 npm start
@@ -224,7 +264,7 @@ http://localhost:3000
 
 # 🧪 Using the Application
 
-1. Open the web interface
+1. Open the React interface
 2. Upload an MRI image
 3. Click **Analyze MRI**
 4. The AI model predicts tumor type
@@ -237,35 +277,15 @@ http://localhost:3000
 
 This project implements a **Deep Learning based medical image classification system** for detecting brain tumors from MRI scans.
 
-The system uses **Transfer Learning with MobileNetV2** to achieve high accuracy while keeping the model lightweight.
+The model uses **Transfer Learning with MobileNetV2**, a lightweight CNN architecture pretrained on ImageNet, which allows high accuracy with limited medical data.
 
-The project demonstrates a **complete AI pipeline**:
+The application demonstrates an **end-to-end AI deployment pipeline**:
 
 MRI Image → Preprocessing → Deep Learning Model → Prediction API → Web Interface
 
 ---
 
-# 🤖 AI Model
-
-Model Architecture:
-
-```
-Input Image (224x224x3)
-↓
-MobileNetV2 (Pretrained on ImageNet)
-↓
-GlobalAveragePooling2D
-↓
-Dense Layer (128 units)
-↓
-Dropout
-↓
-Softmax Output Layer
-```
-
----
-
-# 📊 Classification Classes
+# 📊 Tumor Classes
 
 | Class      | Description                |
 | ---------- | -------------------------- |
@@ -285,7 +305,7 @@ Binary classification mapping:
 
 # ⚙️ Tech Stack
 
-Machine Learning:
+Machine Learning
 
 * TensorFlow
 * Keras
@@ -294,19 +314,19 @@ Machine Learning:
 * OpenCV
 * Scikit-learn
 
-Backend:
+Backend
 
 * Python
 * Flask
 * Flask-CORS
 
-Frontend:
+Frontend
 
 * React.js
 * JavaScript
 * CSS
 
-Visualization:
+Visualization
 
 * Matplotlib
 * Seaborn
@@ -319,14 +339,14 @@ Visualization:
 | ------------ | ----------- |
 | Accuracy     | ~94%        |
 | Architecture | MobileNetV2 |
-| Classes      | 4           |
 | Input Size   | 224 × 224   |
+| Classes      | 4           |
 
 ---
 
 # ⚠️ Important Notes
 
-The following folders are **not included in the repository**:
+The following folders are **not included in the repository** and must be created locally:
 
 ```
 dataset
@@ -335,10 +355,9 @@ node_modules
 uploads
 ```
 
-They must be created locally.
 
 ---
 
 # 📜 License
 
-This project is licensed under the  **MIT License**.
+This project is licensed under the **MIT License**.
