@@ -195,6 +195,113 @@
 
 
 
+//import React, { useState } from "react";
+//import "./App.css";
+//import jsPDF from "jspdf";
+//
+//function App() {
+//  const [selectedImage, setSelectedImage] = useState(null);
+//  const [preview, setPreview] = useState(null);
+//  const [result, setResult] = useState(null);
+//  const [loading, setLoading] = useState(false);
+//
+//  const handleImageChange = (event) => {
+//    const file = event.target.files[0];
+//    if (file) {
+//      setSelectedImage(file);
+//      setPreview(URL.createObjectURL(file));
+//      setResult(null);
+//    }
+//  };
+//
+//  const handleSubmit = async () => {
+//    if (!selectedImage) return alert("Select an MRI first.");
+//    const formData = new FormData();
+//    formData.append("image", selectedImage);
+//
+//    try {
+//      setLoading(true);
+//      const response = await fetch("http://127.0.0.1:5000/predict", {
+//        method: "POST",
+//        body: formData,
+//      });
+//      const data = await response.json();
+//      setResult(data);
+//      setLoading(false);
+//    } catch (error) {
+//      alert("Error contacting backend.");
+//      setLoading(false);
+//    }
+//  };
+//
+//  const downloadReport = () => {
+//    const doc = new jsPDF();
+//    doc.text("Brain Tumor AI Analysis", 20, 20);
+//    doc.text(`Diagnosis: ${result.prediction}`, 20, 40);
+//    doc.text(`Confidence: ${result.confidence.toFixed(2)}%`, 20, 50);
+//    doc.save("Report.pdf");
+//  };
+//
+//  return (
+//    <div className="container">
+//      <h1>🧠 Brain Tumor Detection System</h1>
+//
+//      <div className="upload-box">
+//        <input type="file" accept="image/*" onChange={handleImageChange} />
+//        <button onClick={handleSubmit} disabled={loading}>
+//          {loading ? "Analyzing..." : "Analyze MRI"}
+//        </button>
+//      </div>
+//
+//      {/* Stage 1: Image Acquisition */}
+//      {preview && !result && (
+//        <div className="stage-card" style={{ maxWidth: "300px", margin: "auto" }}>
+//          <span className="stage-label">Stage 1</span>
+//          <p>Input Image Acquired</p>
+//          <img src={preview} alt="Input" />
+//        </div>
+//      )}
+//
+//      {result && (
+//        <div className="result-section">
+//          <h2>9-Stage Implementation Results</h2>
+//          <div className="pipeline-grid">
+//            <div className="stage-card">
+//              <span className="stage-label">Stage 2</span>
+//              <p>ROI Extraction</p>
+//              <img src={result.stage_images.roi} alt="ROI" />
+//            </div>
+//            <div className="stage-card">
+//              <span className="stage-label">Stage 3</span>
+//              <p>Pre-Processing</p>
+//              <img src={result.stage_images.processed} alt="P" />
+//            </div>
+//            <div className="stage-card">
+//              <span className="stage-label">Stage 4/5</span>
+//              <p>Segmentation Mask</p>
+//              <img src={result.stage_images.mask} alt="M" />
+//            </div>
+//            <div className="stage-card highlight">
+//              <span className="stage-label">Stage 8/9</span>
+//              <p>Grad-CAM Overlay</p>
+//              <img src={result.stage_images.gradcam} alt="G" />
+//            </div>
+//          </div>
+//
+//          <div className="final-prediction">
+//            <h2>Result: <span className="highlight-text">{result.prediction}</span></h2>
+//            <p>Confidence Score: <strong>{result.confidence.toFixed(2)}%</strong></p>
+//            <button onClick={downloadReport} style={{ background: "#3b82f6" }}>Download PDF</button>
+//          </div>
+//        </div>
+//      )}
+//    </div>
+//  );
+//}
+//
+//export default App;
+
+
 import React, { useState } from "react";
 import "./App.css";
 import jsPDF from "jspdf";
@@ -256,35 +363,57 @@ function App() {
       {/* Stage 1: Image Acquisition */}
       {preview && !result && (
         <div className="stage-card" style={{ maxWidth: "300px", margin: "auto" }}>
-          <span className="stage-label">Stage 1</span>
-          <p>Input Image Acquired</p>
+          <span className="stage-label">Input</span>
+          <p>MRI Acquired</p>
           <img src={preview} alt="Input" />
         </div>
       )}
 
       {result && (
         <div className="result-section">
-          <h2>9-Stage Implementation Results</h2>
+          <h2>SAM-GNN Framework Pipeline</h2>
+
           <div className="pipeline-grid">
+            {/* Step 1: Preprocessing */}
             <div className="stage-card">
-              <span className="stage-label">Stage 2</span>
-              <p>ROI Extraction</p>
-              <img src={result.stage_images.roi} alt="ROI" />
-            </div>
-            <div className="stage-card">
-              <span className="stage-label">Stage 3</span>
+              <span className="stage-label">Step 1</span>
               <p>Pre-Processing</p>
-              <img src={result.stage_images.processed} alt="P" />
+              <img src={result.stage_images.processed} alt="Pre-processed" />
             </div>
+
+            {/* Step 2: SAM Mask */}
             <div className="stage-card">
-              <span className="stage-label">Stage 4/5</span>
-              <p>Segmentation Mask</p>
-              <img src={result.stage_images.mask} alt="M" />
+              <span className="stage-label">Step 2</span>
+              <p>Segment Anything (SAM)</p>
+              <img src={result.stage_images.sam_mask} alt="SAM Mask" />
             </div>
+
+            {/* Step 3: Superpixels */}
+            <div className="stage-card">
+              <span className="stage-label">Step 3</span>
+              <p>Superpixel (SLIC)</p>
+              <img src={result.stage_images.superpixel} alt="Superpixels" />
+            </div>
+
+            {/* Step 4: Graph Construction */}
+            <div className="stage-card">
+              <span className="stage-label">Step 4</span>
+              <p>Graph Construction</p>
+              <img src={result.stage_images.graph} alt="Graph Network" />
+            </div>
+
+            {/* Step 5: Refined Segmentation (Highlighted) */}
             <div className="stage-card highlight">
-              <span className="stage-label">Stage 8/9</span>
+              <span className="stage-label">Step 5</span>
+              <p>Refined Segmentation</p>
+              <img src={result.stage_images.refined} alt="Refined Tumor" />
+            </div>
+
+            {/* Bonus: CNN Grad-CAM */}
+            <div className="stage-card">
+              <span className="stage-label">CNN Branch</span>
               <p>Grad-CAM Overlay</p>
-              <img src={result.stage_images.gradcam} alt="G" />
+              <img src={result.stage_images.gradcam} alt="Grad-CAM" />
             </div>
           </div>
 
