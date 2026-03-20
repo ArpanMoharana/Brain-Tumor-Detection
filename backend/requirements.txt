@@ -1,15 +1,38 @@
+# ── Core ML ──────────────────────────────────────────────────
+tensorflow==2.15.0
+keras==2.15.0
+
+# ── PyTorch (CPU — change to cu118/cu121 build if you have a GPU) ──
+torch==2.1.0
+torchvision==0.16.0
+
+# ── PyTorch Geometric ─────────────────────────────────────────
+torch_geometric==2.4.0
+# Optional sparse acceleration (install separately if needed):
+# torch_scatter torch_sparse torch_cluster torch_spline_conv
+
+# ── Meta Segment Anything Model ───────────────────────────────
+segment-anything==1.0
+
+# ── Computer Vision ───────────────────────────────────────────
+opencv-python==4.9.0.80
+opencv-contrib-python==4.9.0.80
+
+# ── Scientific / Image processing ────────────────────────────
+numpy==1.26.4
+scikit-image==0.22.0
+scikit-learn==1.4.2
+scipy==1.13.0
+matplotlib==3.8.4
+Pillow==10.3.0
+
+# ── Graph processing ──────────────────────────────────────────
+networkx==3.3
+
+# ── Flask API ─────────────────────────────────────────────────
 flask==3.0.3
 flask-cors==4.0.1
 
-tensorflow==2.15.0
-
-numpy==1.26.4
-opencv-python==4.9.0.80
-pillow==10.3.0
-
-matplotlib==3.8.4
-seaborn==0.13.2
-
-scikit-learn==1.4.2
-
-h5py==3.11.0
+# ── Utilities ─────────────────────────────────────────────────
+tqdm==4.66.4
+nibabel==5.2.1
