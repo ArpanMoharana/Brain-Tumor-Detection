@@ -15,9 +15,9 @@ Users upload MRI images through a clinical dark-theme web interface. The system 
 ## 🏗️ Architecture Overview
 
 ```
-MRI Image
-    │
-    ▼
+                          MRI Image
+                            │
+                            ▼
 ┌─────────────────────────────────────────────────────────┐
 │                  Pipeline                               │
 │                                                         │
@@ -36,9 +36,9 @@ MRI Image
 │                          │                              │
 │              CNN 60% + GNN 40%                          │
 └─────────────────────────────────────────────────────────┘
-    │
-    ▼
-Final Diagnosis + 6 Visual Pipeline Stages
+                            │
+                            ▼
+        Final Diagnosis + 6 Visual Pipeline Stages
 ```
 
 ---
