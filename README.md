@@ -37,9 +37,10 @@ Final Diagnosis + 6 Visual Pipeline Stages
 
 ---
 
+```
 ## 📂 Project Structure
 
-```
+
 Brain-Tumor-Detection/
 │
 ├── backend/
@@ -59,10 +60,25 @@ Brain-Tumor-Detection/
 │   └── uploads/
 │
 ├── frontend/
+│
+├── dataset/                  ✅ ← ADD THIS FOLDER
+│   ├── train/
+│   │   ├── glioma/
+│   │   ├── meningioma/
+│   │   ├── pituitary/
+│   │   └── notumor/
+│   │
+│   └── test/
+│       ├── glioma/
+│       ├── meningioma/
+│       ├── pituitary/
+│       └── notumor/
+│
 ├── research/
 ├── README.md
 ├── LICENSE
 └── .gitignore
+
 ```
 
 ---
