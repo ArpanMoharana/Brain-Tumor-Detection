@@ -1008,7 +1008,7 @@ class_labels = ["Glioma", "Meningioma", "No Tumor", "Pituitary"]
 
 cnn_model = load_model("models/brain_tumor_model.h5")
 
-sam_checkpoint = "models/sam_vit_h.pth"
+sam_checkpoint = "models/sam_vit_h_4b8939.pth"
 sam = sam_model_registry['vit_h'](checkpoint=sam_checkpoint)
 sam_predictor = SamPredictor(sam)
 
