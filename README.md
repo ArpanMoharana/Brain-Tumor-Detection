@@ -154,15 +154,24 @@ Brain-Tumor-Detection/dataset/test
 
 ### Step 2 — Activate Environment
 
+# Mac/Linux
 ```bash
 cd backend
 
-# Mac/Linux
+
+python3 -m venv venv
+```
+```
 source venv/bin/activate
+```
 
 # Windows
+```
+cd backend
+
 venv\Scripts\activate
 ```
+
 
 ---
 
