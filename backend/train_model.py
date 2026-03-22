@@ -9,8 +9,8 @@ from sklearn.metrics import confusion_matrix
 # -----------------------------
 # DATASET PATHS
 # -----------------------------
-train_dir = "../dataset/train"
-test_dir = "../dataset/test"
+train_dir = "../dataset/Training"
+test_dir = "../dataset/Testing"
 
 # -----------------------------
 # DATA GENERATORS
