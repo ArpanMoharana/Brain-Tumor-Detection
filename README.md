@@ -1,4 +1,4 @@
-# 🧠 Dual-Brain Brain Tumor Detection System
+# 🧠 Brain Tumor Detection System
 
 An **AI-powered web application** that detects brain tumors from MRI scans using a **multi-model ensemble architecture** combining CNN texture analysis, SAM segmentation, and GNN geometric reasoning.
 
@@ -102,25 +102,6 @@ Model files are **not included in this repository** due to size limits. Download
 wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -O backend/models/sam_vit_h.pth
 ```
 
----
-
-## 🤖 Retrain Models (Optional — Colab)
-
-If you want to retrain from scratch, use the notebooks in `research/`. They require a Kaggle API key (`kaggle.json`).
-
-**Step 1 — Retrain CNN:**
-Open `research/CNN_Retrain_BrainTumor.ipynb` in Google Colab (T4 GPU).
-Upload `kaggle.json`, run all cells. Downloads Msoud dataset automatically.
-
-**Step 2 — Boost Glioma recall:**
-Open `research/CNN_BoostGlioma.ipynb` in the same Colab session.
-Loads `best_p2.keras` and fine-tunes with focal loss + doubled Glioma weight.
-
-**Step 3 — Train GNN:**
-Open `research/GNN_Train_Real_Data.ipynb` in Google Colab.
-Builds ~4760 superpixel graphs from real MRI images and trains the GNN.
-
-After training, download and place `.h5` and `.pth` files into `backend/models/`.
 
 ---
 
