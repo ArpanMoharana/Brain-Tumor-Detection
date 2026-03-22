@@ -93,9 +93,9 @@ Model files are **not included in this repository** due to size limits. Download
 
 | File | Size | Source |
 |------|------|--------|
-| `brain_tumor_model.h5` | ~14 MB | [Google Drive](https://drive.google.com/your-link) |
-| `gnn_tumor_model_smart.pth` | ~1 MB | [Google Drive](https://drive.google.com/your-link) |
-| `sam_vit_h.pth` | 2.4 GB | [Meta AI](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) |
+| `brain_tumor_model.h5` | ~14 MB | Present with Code |
+| `gnn_tumor_model_smart.pth` | ~1 MB | Present with Code |
+| `sam_vit_h.pth` | 2.4 GB | Need To download [Meta AI](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) |
 
 ```bash
 # Download SAM directly
@@ -178,6 +178,26 @@ Frontend runs at: `http://localhost:3000`
 4. View all 6 pipeline stages as they process
 5. Read the final diagnosis, confidence score, and per-class probabilities
 6. Download the PDF report
+
+---
+
+## 🤖 Retrain Models (Optional — Colab)
+
+If you want to retrain from scratch, use the notebooks in `research/`. They require a Kaggle API key (`kaggle.json`).
+
+**Step 1 — Retrain CNN:**
+Open `research/CNN_Retrain_BrainTumor.ipynb` in Google Colab (T4 GPU).
+Upload `kaggle.json`, run all cells. Downloads Msoud dataset automatically.
+
+**Step 2 — Boost Glioma recall:**
+Open `research/CNN_BoostGlioma.ipynb` in the same Colab session.
+Loads `best_p2.keras` and fine-tunes with focal loss + doubled Glioma weight.
+
+**Step 3 — Train GNN:**
+Open `research/GNN_Train_Real_Data.ipynb` in Google Colab.
+Builds ~4760 superpixel graphs from real MRI images and trains the GNN.
+
+After training, download and place `.h5` and `.pth` files into `backend/models/`.
 
 ---
 
