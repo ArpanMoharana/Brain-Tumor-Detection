@@ -1,4 +1,10 @@
 # 🧠 Brain Tumor Detection System
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
 An **AI-powered web application** that detects brain tumors from MRI scans using a **multi-model ensemble architecture** combining CNN texture analysis, SAM segmentation, and GNN geometric reasoning.
 
@@ -13,7 +19,7 @@ MRI Image
     │
     ▼
 ┌─────────────────────────────────────────────────────────┐
-│                  Dual-Brain Pipeline                    │
+│                  Pipeline                               │
 │                                                         │
 │  ┌──────────────┐        ┌────────────────────────────┐ │
 │  │  CNN Branch  │        │      SAM + GNN Branch      │ │
@@ -40,19 +46,19 @@ Final Diagnosis + 6 Visual Pipeline Stages
 ```
 ## 📂 Project Structure
 
-
+```text
 Brain-Tumor-Detection/
 │
 ├── backend/
 │   ├── app.py
 │   ├── train_model.py
+│   ├── download_sam.py
 │   ├── requirements.txt
 │   │
 │   ├── models/
-│   │   ├── .gitkeep
 │   │   ├── brain_tumor_model.h5
 │   │   ├── gnn_tumor_model_smart.pth
-│   │   └── sam_vit_h.pth
+│   │   └── sam_vit_h_4b8939.pth
 │   │
 │   ├── src/
 │   │   └── predict.py
@@ -61,26 +67,14 @@ Brain-Tumor-Detection/
 │
 ├── frontend/
 │
-├── dataset/                  ✅ ← ADD THIS FOLDER
+├── dataset/
 │   ├── train/
-│   │   ├── glioma/
-│   │   ├── meningioma/
-│   │   ├── pituitary/
-│   │   └── notumor/
-│   │
 │   └── test/
-│       ├── glioma/
-│       ├── meningioma/
-│       ├── pituitary/
-│       └── notumor/
 │
-├── research/
 ├── README.md
-├── LICENSE
 └── .gitignore
 
 ```
-
 ---
 
 ## 📥 Clone the Repository
@@ -92,19 +86,7 @@ cd Brain-Tumor-Detection
 
 ---
 
-## 📦 Download Model Weights
 
-Model files are **not included in this repository** due to size limits.
-
-| File                      | Size   | Source            |
-| ------------------------- | ------ | ----------------- |
-| brain_tumor_model.h5      | ~14 MB | Present with Code |
-| gnn_tumor_model_smart.pth | ~1 MB  | Present with Code |
-| `sam_vit_h.pth`           | 2.4 GB | [Meta AI](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) 
-
-```bash
-wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -O backend/models/sam_vit_h.pth
-```
 
 ---
 
@@ -121,21 +103,25 @@ https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
 ```
 dataset/
 ├── train/
-├── test/
+│   ├── glioma/
+│   ├── meningioma/
+│   ├── pituitary/
+│   └── notumor/
+│
+└── test/
+    ├── glioma/
+    ├── meningioma/
+    ├── pituitary/
+    └── notumor/
 ```
 
-Each contains:
 
-```
-glioma/
-meningioma/
-pituitary/
-notumor/
-```
 
 ---
 
 ## 🧠 How to Train the Model (Local Training)
+
+### Step 1
 
 The project includes a local training script:
 
@@ -143,12 +129,6 @@ The project includes a local training script:
 backend/train_model.py
 ```
 
-### Step 1 — Prepare Dataset
-
-```
-Brain-Tumor-Detection/dataset/train
-Brain-Tumor-Detection/dataset/test
-```
 
 ---
 
@@ -177,11 +157,13 @@ venv\Scripts\activate
 
 ### Step 3 — Run Training
 
+## FOR MAC
+
 ```bash
 python3 train_model.py
 ```
 
-(Windows)
+## FOR WINDOWS
 
 ```bash
 python train_model.py
@@ -216,6 +198,21 @@ backend/models/brain_tumor_model.h5
 * Overwrites existing model
 
 ---
+# 📦 Download SAM Model (REQUIRED)
+
+- You have 2 options to download the Segment Anything (SAM) weights:
+
+## 🔹 Option 1: Automatic (Recommended)
+```
+cd backend
+python3 download_sam.py
+```
+## 🔹 Option 2: Manual Download
+```
+cd backend/models
+wget [https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)
+```
+---
 
 ## 🚀 Running the Project
 
@@ -240,12 +237,14 @@ npm start
 
 ---
 
-## 🧪 Usage
+## 🧪 How to Use
+- Upload an MRI image via the web interface.
 
-1. Upload MRI
-2. Click Analyze
-3. View stages
-4. Get prediction
+- Click Analyze.
+
+- View the detection results, class predictions, and visual overlays.
+
+- Click Download Report to save a PDF of the results.
 
 ---
 
@@ -280,6 +279,43 @@ npm start
 * OpenCV
 * React
 * Flask
+
+---
+
+## Notes!
+⚠️ Training is mandatory before running the application.
+
+⚠️ The SAM model must be downloaded before running inference.
+
+💡 Hardware: CPU works, but a GPU is highly recommended for faster performance.
+
+---
+
+
+# 💻 System Requirements
+
+### Minimum Requirements
+- OS: Windows / macOS / Linux
+- RAM: 8 GB
+- Storage: 5–10 GB free space
+- Python: 3.9 – 3.11
+- Node.js: v16+
+
+---
+
+### Recommended (for better performance)
+
+- RAM: 16 GB
+- GPU: NVIDIA GPU (for faster training/inference)
+- CUDA (optional, for GPU acceleration)
+
+---
+
+### Notes
+- CPU execution is fully supported (default)
+- Mac users can use **MPS acceleration**
+- GPU is **not mandatory**, but speeds up training significantly
+- SAM model (~2.5GB) requires stable internet for first download
 
 ---
 
