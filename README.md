@@ -84,7 +84,7 @@ Model files are **not included in this repository** due to size limits.
 | ------------------------- | ------ | ----------------- |
 | brain_tumor_model.h5      | ~14 MB | Present with Code |
 | gnn_tumor_model_smart.pth | ~1 MB  | Present with Code |
-| sam_vit_h.pth             | 2.4 GB | Meta AI           |
+| `sam_vit_h.pth`           | 2.4 GB | [Meta AI](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth) 
 
 ```bash
 wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -O backend/models/sam_vit_h.pth
